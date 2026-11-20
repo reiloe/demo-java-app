@@ -1,93 +1,140 @@
-# demo-java-app
+# Demo Java App
 
+[![GitHub Actions CI](https://img.shields.io/github/actions/workflow/status/reiloe/demo-java-app/ci.yml?style=for-the-badge&logo=github&label=GitHub%20CI)](https://github.com/reiloe/demo-java-app/actions/workflows/ci.yml)
+[![GitLab Pipeline Status](https://img.shields.io/gitlab/pipeline-status/reilo2401%2Fdemo-java-app?branch=main&style=for-the-badge&logo=gitlab&label=GitLab%20CI)](https://gitlab.com/reilo2401/demo-java-app/-/pipelines)
+[![Code Coverage](https://img.shields.io/gitlab/pipeline-coverage/reilo2401%2Fdemo-java-app?branch=main&style=for-the-badge&logo=gitlab&label=Coverage)](https://gitlab.com/reilo2401/demo-java-app/-/pipelines)
 
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-3.9+-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
+![Gradle](https://img.shields.io/badge/Gradle-9.9-02303A?style=for-the-badge&logo=gradle&logoColor=white)
+![JUnit](https://img.shields.io/badge/JUnit-6-25A162?style=for-the-badge&logo=junit5&logoColor=white)
 
-## Getting started
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+A clean Java 21 command-line application for my developer portfolio that calculates and displays the remaining time until a user-defined goal deadline. This repository is intentionally structured to be built and tested using **both Apache Maven and Gradle without duplicating source code**.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### Example Usage
 
-## Add your files
+**Interactive Mode:**
+```text
+Enter your goal: Finish Cloud Certification
+Enter the deadline (YYYY-MM-DD): 2027-06-01
+Enter start date (YYYY-MM-DD, press Enter for today): 2026-06-01
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
+Remaining time until 'Finish Cloud Certification': 0 year(s), 6 month(s), 12 day(s) (193 total days).
+Progress: [██████████░░░░░░░░░░] 47% elapsed
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/reilo2401/demo-java-app.git
-git branch -M main
-git push -uf origin main
+
+**Non-Interactive CLI Mode (for scripts & automation):**
+```bash
+java -jar target/demo-java-app-1.0.0.jar "Finish Cloud Certification" 2027-06-01 2026-06-01
 ```
 
-## Integrate with your tools
+---
 
-* [Set up project integrations](https://gitlab.com/reilo2401/demo-java-app/-/settings/integrations)
+## Key Highlights
 
-## Collaborate with your team
+* **Dual Build Setup:** • Includes both a pom.xml (centralized <properties>) and a build.gradle.kts (backed by gradle/libs.versions.toml) alongside their wrappers (mvnw / gradlew), requiring no pre-installed build tools.
+* **Modern Java 21 Architecture:** Utilizes sealed interfaces, record types, switch pattern matching, and java.time APIs with deterministic unit tests.
+* **Interactive & Scriptable CLI:** Supports both guided console prompts (with input validation loops) and direct command-line arguments.
+* **Multi-Hoster & Dual CI/CD:** Mirrored simultaneously on **GitHub** and **GitLab**. Every push automatically triggers both **GitHub Actions** and **GitLab CI/CD** pipelines to verify the Maven and Gradle builds.
+* **Test Coverage Ready:** Designed to integrate cleanly with JaCoCo for automated test coverage reporting across both build systems.
+* **Automated Documentation:** Includes a zero-dependency Python script (`scripts/update-tree.py`) to keep the project directory tree in this README up to date (can be run manually or wired into a local Git `pre-commit` hook).
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+---
 
-## Test and Deploy
+## Prerequisites
 
-Use the built-in continuous integration in GitLab.
+* **Java Development Kit (JDK) 21** or higher (Gradle will automatically provision a matching JDK via toolchains if none is found locally).
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+---
 
-***
+## Building & Testing
 
-# Editing this README
+Clone the repository from [GitHub](https://github.com/reiloe/demo-java-app) or [GitLab](https://gitlab.com/reilo2401/demo-java-app):
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+```bash
+# Clone from GitHub
+git clone https://github.com/reiloe/demo-java-app.git
 
-## Suggestions for a good README
+# Or clone from GitLab
+git clone https://gitlab.com/reilo2401/demo-java-app.git
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+cd demo-java-app
+```
 
-## Name
-Choose a self-explaining name for your project.
+### Option A: Using Maven
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+**Run tests:**
+```bash
+./mvnw test
+```
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+**Build & run the executable JAR:**
+```bash
+./mvnw clean package
+java -jar target/demo-java-app-1.0.0.jar
+```
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Option B: Using Gradle
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+**Run tests:**
+```bash
+./gradlew test
+```
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+**Build & run the executable JAR:**
+```bash
+./gradlew clean build
+java -jar build/libs/demo-java-app-1.0.0.jar
+```
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+---
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Project Structure
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+*Maintained via `scripts/update-tree.py` (run `python3 scripts/update-tree.py` or configure a local Git `pre-commit` hook to update automatically before committing):*
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+<!-- TREE_START -->
+```text
+demo-java-app/
+├── .github/workflows/
+│   └── ci.yml
+├── .mvn/
+├── gradle/
+│   └── libs.versions.toml
+├── scripts/
+│   └── update-tree.py
+├── src/
+│   ├── main/java/de/reilo/countdown/
+│   │   ├── CountdownResult.java
+│   │   ├── CountdownService.java
+│   │   └── Main.java
+│   └── test/java/de/reilo/countdown/
+│       └── CountdownServiceTest.java
+├── .gitignore
+├── .gitlab-ci.yml
+├── build.gradle.kts
+├── gradlew
+├── gradlew.bat
+├── LICENSE
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── README.md
+└── settings.gradle.kts
+```
+<!-- TREE_END -->
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+---
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Author
+
+* **GitHub:** [@reiloe](https://github.com/reiloe)
+* **GitLab:** [@reilo2401](https://gitlab.com/reilo2401)

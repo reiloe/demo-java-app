@@ -1,0 +1,57 @@
+image: eclipse-temurin:21-jdk
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .m2/repository
+    - .gradle/caches
+    - .gradle/wrapper
+
+stages:
+  - verify
+  - build
+
+readme-tree-check:
+  stage: verify
+  image: python:3.12-slim
+  before_script:
+    - apt-get update && apt-get install -y --no-install-recommends git
+  script:
+    - python3 scripts/update-tree.py
+    - git diff --exit-code README.md
+
+maven-build:
+  stage: build
+  script:
+    - chmod +x mvnw
+    - ./mvnw clean package
+    - awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/", instructions, "instructions covered"; printf "Total coverage: %.2f%%\n", 100*covered/instructions }' target/site/jacoco/jacoco.csv
+  coverage: '/Total coverage: (\d+\.\d+%)/'
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+    paths:
+      - target/site/jacoco/
+      - target/*.jar
+
+gradle-build:
+  stage: build
+  script:
+    - chmod +x gradlew
+    - ./gradlew clean build
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - build/test-results/test/TEST-*.xml
+      coverage_report:
+        coverage_format: jacoco
+        path: build/reports/jacoco/test/jacocoTestReport.xml
+    paths:
+      - build/libs/*.jar

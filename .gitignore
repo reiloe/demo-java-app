@@ -1,0 +1,77 @@
+# ==========================================
+# Maven
+# ==========================================
+.m2/
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Hinweis: Falls der Wrapper offline ohne Download funktionieren soll,
+# die Zeile oben (.mvn/wrapper/maven-wrapper.jar) einfach auskommentieren.
+
+# ==========================================
+# Gradle
+# ==========================================
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ==========================================
+# Java / Kompilierte Dateien
+# ==========================================
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+hs_err_pid*
+replay_pid*
+
+# Gepackte Archive (außer Wrapper-JARs)
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+!gradle-wrapper.jar
+!maven-wrapper.jar
+
+# ==========================================
+# IDEs & Editoren
+# ==========================================
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+
+# VS Code
+.vscode/
+
+# ==========================================
+# Betriebssysteme
+# ==========================================
+.DS_Store
+Thumbs.db
+
