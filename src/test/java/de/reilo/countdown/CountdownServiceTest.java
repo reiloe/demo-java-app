@@ -91,4 +91,18 @@ class CountdownServiceTest {
         assertThrows(IllegalArgumentException.class,
                 () -> service.calculateRemainingTime("", today.plusDays(5), today, today));
     }
+
+    @Test
+    void parseDate_nullInput_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> service.parseDate(null, "Deadline"));
+    }
+
+    @Test
+    void calculateRemainingTime_nullArguments_throwsException() {
+        LocalDate today = LocalDate.of(2026, 11, 20);
+        assertThrows(IllegalArgumentException.class, () -> service.calculateRemainingTime(null, today, today, today));
+        assertThrows(IllegalArgumentException.class, () -> service.calculateRemainingTime("Goal", null, today, today));
+        assertThrows(IllegalArgumentException.class, () -> service.calculateRemainingTime("Goal", today, null, today));
+        assertThrows(IllegalArgumentException.class, () -> service.calculateRemainingTime("Goal", today, today, null));
+    }
 }
