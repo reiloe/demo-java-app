@@ -37,7 +37,7 @@ java -jar target/demo-java-app-1.0.0.jar "Finish Cloud Certification" 2027-06-01
 * **Dual Build Setup:** • Includes both a pom.xml (centralized <properties>) and a build.gradle.kts (backed by gradle/libs.versions.toml) alongside their wrappers (mvnw / gradlew), requiring no pre-installed build tools.
 * **Modern Java 21 Architecture:** Utilizes sealed interfaces, record types, switch pattern matching, and java.time APIs with deterministic unit tests.
 * **Interactive & Scriptable CLI:** Supports both guided console prompts (with input validation loops) and direct command-line arguments.
-* **Multi-Hoster & Dual CI/CD:** Mirrored simultaneously on **GitHub** and **GitLab**. Every push automatically triggers both **GitHub Actions** and **GitLab CI/CD** pipelines to verify the Maven and Gradle builds.
+* **Multi-Hoster & Multi-CI/CD:** Mirrored simultaneously on **GitHub** and **GitLab**, featuring automated pipelines for **GitHub Actions**, **GitLab CI/CD**, and **Jenkins** (including Docker image builds and registry push).
 * **Test Coverage Ready:** Designed to integrate cleanly with JaCoCo for automated test coverage reporting across both build systems.
 * **Automated Documentation:** Includes a zero-dependency Python script (`scripts/update-tree.py`) to keep the project directory tree in this README up to date (can be run manually or wired into a local Git `pre-commit` hook).
 
@@ -115,8 +115,10 @@ demo-java-app/
 ├── .gitignore
 ├── .gitlab-ci.yml
 ├── build.gradle.kts
+├── Dockerfile
 ├── gradlew
 ├── gradlew.bat
+├── Jenkinsfile
 ├── LICENSE
 ├── mvnw
 ├── mvnw.cmd
