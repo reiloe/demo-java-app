@@ -29,8 +29,13 @@ maven-build:
   script:
     - chmod +x mvnw
     - ./mvnw clean package
-    - awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/", instructions, "instructions covered"; printf "Total coverage: %.2f%%\n", 100*covered/instructions }' target/site/jacoco/jacoco.csv
+    - |
+      awk -F"," '{ instructions += $4 + $5; covered += $5 } END {
+        print covered, "/", instructions, "instructions covered";
+        printf "Total coverage: %.2f%%\n", 100*covered/instructions
+      }' target/site/jacoco/jacoco.csv
   coverage: '/Total coverage: (\d+\.\d+%)/'
+
   artifacts:
     when: always
     reports:
